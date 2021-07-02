@@ -141,15 +141,15 @@ exports.getOneUser = (req, res, next) => {
   const token = req.headers.authorization
   const decodedToken = jwt.decode(token.split(" ")[1])
   const userId = decodedToken.userId
-  var accountValue, commentValue, postValue
+  let accountValue, commentValue, postValue
 
-  // SUPPRIMER TOUT LES COMMENTAIRES
+  // SUPPRIMER TOUS LES COMMENTAIRES
 
   await Models.comment.destroy({where: { userid: userId }})
   .then( destroy => { commentValue = destroy})
   .catch(error => res.status(500).json({ error }));
 
-  // SUPPRIMER TOUT LES POSTS
+  // SUPPRIMER TOUS LES POSTS
 
   await Models.post.destroy({where: { userID: userId }})
   .then( destroy => { postValue = destroy})
