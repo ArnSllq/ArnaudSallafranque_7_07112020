@@ -6,12 +6,13 @@ const dotenv = require('dotenv');
 const { Sequelize } = require('sequelize');
 
 // const postRoutes = require('./routes/post');
-// const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 
 dotenv.config()
 
 const sequelize = new Sequelize(''+process.env.DB_NAME+'', ''+process.env.DB_USER+'', ''+process.env.DB_PWD+'', {
-  host: 'localhost:3306',
+  host: 'localhost',
+  port: 3306,
   dialect: 'mysql'
 });
 
@@ -34,4 +35,5 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 // app.use('/api/post', postRoutes);
 // app.use('/api/auth', userRoutes);
+app.use('/api/user', userRoutes)
 module.exports = app;
