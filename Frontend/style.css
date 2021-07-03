@@ -1,10 +1,18 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 header {
     height: 200px;
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items:center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header .groupo-logo {
@@ -17,7 +25,23 @@ nav ul {
     text-align: right;
 }
 
+nav a {
+    text-decoration: none;
+}
+
 form {
+    width: min-content;
+    background-color: #CECCCC;
     text-align: center;
-    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+}
+form div {
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+}
+.login-btn {
+    margin-top: 10px;
 }
