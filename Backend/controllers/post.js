@@ -9,7 +9,7 @@ const Models = require('../models')
     Models.post.findAll({
       //attributes: ['email', 'firstname'],
     //   where: { id: req.params.id }, inutile car on veut tous les posts ?
-      order: ['id', 'DESC']
+     // order: ['id', 'DESC']
     })
     .then(posts => {
       if(posts){
@@ -23,7 +23,7 @@ const Models = require('../models')
 
 /**
  * GET : Afficher un post
- * postID
+ * postId
  */
  exports.getOnePost = (req, res, next) => {
     Models.post.findOne({
@@ -44,10 +44,10 @@ const Models = require('../models')
  * POST : Creer un post
  * email, description, date
  */
-exports.createPost = (req, res, next) => {
+exports.createPost = async (req, res, next) => {
     const newPost = await Models.post.create(
         { description: req.body.description,
-            userID: user.id
+            userId: user.id
         })
     .then( post => {
         res.status(200).json({message : "OK", post})
@@ -57,7 +57,7 @@ exports.createPost = (req, res, next) => {
 
 /**
  * PUT : Modifier un post
- * token, postID
+ * token, postId
  */
  exports.modifyPost = (req, res, next) => {
     const token = req.headers.authorization
@@ -75,7 +75,7 @@ exports.createPost = (req, res, next) => {
 
 /**
  * DELETE : Supprimer un post
- * token, postID
+ * token, postId
  */
  exports.deletePost = async (req, res, next) => {
 
@@ -86,13 +86,13 @@ exports.createPost = (req, res, next) => {
   
     // SUPPRIMER TOUS LES COMMENTAIRES
   
-    await Models.comment.destroy({where: { userid: userId }})
+    await Models.comment.destroy({where: { userId: userId }})
     .then( destroy => { commentValue = destroy})
     .catch(error => res.status(500).json({ error }));
   
     // SUPPRIMER TOUS LES POSTS
   
-    await Models.post.destroy({where: { userID: userId }})
+    await Models.post.destroy({where: { userId: userId }})
     .then( destroy => { postValue = destroy})
     .catch(error => res.status(500).json({ error }));
 

@@ -1,16 +1,16 @@
 /**
  * GET : Count le nombre de commentaire d'un post
- * postID
+ * postId
  */
 
 /**
  * GET : Affiche tout les commentaires d'un post
- * postID
+ * postId
  */
 
 /**
  * POST : Creer un commentaire sur un post
- * postID, token
+ * postId, token
  */
 
 /**

@@ -145,13 +145,13 @@ exports.getOneUser = (req, res, next) => {
 
   // SUPPRIMER TOUS LES COMMENTAIRES
 
-  await Models.comment.destroy({where: { userid: userId }})
+  await Models.comment.destroy({where: { userId: userId }})
   .then( destroy => { commentValue = destroy})
   .catch(error => res.status(500).json({ error }));
 
   // SUPPRIMER TOUS LES POSTS
 
-  await Models.post.destroy({where: { userID: userId }})
+  await Models.post.destroy({where: { userId: userId }})
   .then( destroy => { postValue = destroy})
   .catch(error => res.status(500).json({ error }));
 
