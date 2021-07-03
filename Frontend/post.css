@@ -1,0 +1,36 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    height: 200px;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header .groupo-logo {
+    height: 200px;
+    width: 200px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: right;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+main div {
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
+}
