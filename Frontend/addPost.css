@@ -1,0 +1,47 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    height: 200px;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header .groupo-logo {
+    height: 200px;
+    width: 200px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: right;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+form {
+    width: min-content;
+    background-color: #CECCCC;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+}
+form div {
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+}
+.login-btn {
+    margin-top: 10px;
+}

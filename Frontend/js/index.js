@@ -2,6 +2,22 @@ if(!localStorage.getItem("token")) {
     window.location.href="/Frontend/login.html"
 }
 
+
+function newPost() {
+    let error = false;
+    if(!localStorage.getItem("token")) {
+        window.location.href="/Frontend/login.html"
+        error = true
+    }
+    if(error) {
+        return
+    }    
+    window.location.href="/Frontend/addPost.html"
+};
+
+let addPost = document.getElementById("postBtn")
+addPost.addEventListener('click', newPost)
+
 async function fetchAllPosts() { 
 
     let getPosts = await fetch("http://localhost:3000/api/post/", {

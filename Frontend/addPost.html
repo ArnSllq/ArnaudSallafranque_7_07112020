@@ -5,9 +5,10 @@
         <title>Groupomania</title>
         <link rel="icon" type="image/png" href="source/icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" >
-        <link rel="stylesheet" href="post.css">
+        <link rel="stylesheet" href="addPost.css">
+        <script src="/Frontend/js/addPost.js" defer></script>
 
-        <script src="/Frontend/js/posts.js" defer></script>
+
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     </head>
     <body>
@@ -15,14 +16,19 @@
             <img class="groupo-logo" src="source/icon-left-font.png" alt="logo Groupomania">
             <nav>
                 <ul>
-                    <li>Accueil</li>
+                    <li><a href="index.html">Accueil</a></li>
                     <li><a href="profile.html">Profil</a></li>
                 </ul>
             </nav>
         </header>
             <main>
-                <div id="postContainer">
-
+                <div id="newPostContainer">
+                    <form>
+                        <div><p>Vous pouvez ajouter un nouveau commentaire sur cette page</p></div>
+                        <div><label for="comment">Votre commentaire :</label></div>
+                        <div><input type="text" id="comment" name="comment" placeholder="C'est à vous" required></div>
+                        <div><input type="submit" id="postCommentBtn" value="Envoyer mon commentaire"></div>
+                    </form>
                 </div> 
             </main>
         <footer>
