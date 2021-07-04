@@ -5,10 +5,10 @@ const auth = require('../middleware/auth');
 
 const commentCtrl = require('../controllers/comment');
 
-router.get('/:id', auth, commentCtrl.getCommentNumber);
-router.get('/:id', auth, commentCtrl.getAllComment);
+// router.get('/:id', auth, commentCtrl.getCommentNumber);
+router.get('/:id', auth, commentCtrl.getAllComments);
 router.post('/:id', auth, commentCtrl.createComment);
-router.put('/:id', auth, commentCtrl.modifyComment);
-router.delete('/:id', auth, commentCtrl.deleteComment);
+// router.put('/:id', auth, commentCtrl.modifyComment);
+// router.delete('/:id', auth, commentCtrl.deleteComment);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const router = express.Router()
 const Models = require('../models')
 
 /**
- * GET : Afficher tout les posts
+ * GET : Afficher tous les posts
  */
  exports.getAllPosts = (req, res, next) => {
     Models.post.findAll({
@@ -45,10 +45,10 @@ const Models = require('../models')
  * email, description, date
  */
 exports.createPost = async (req, res, next) => {
-    const newPost = await Models.post.create(
-        { description: req.body.description,
-            userId: user.id
-        })
+    const newPost = await Models.post.create({
+      description: req.body.description,
+      userId: user.id
+      })
     .then( post => {
         res.status(200).json({message : "OK", post})
     })
@@ -84,7 +84,7 @@ exports.createPost = async (req, res, next) => {
     const userId = decodedToken.userId
     let commentValue, postValue
   
-    // SUPPRIMER TOUS LES COMMENTAIRES
+    // SUPPRIMER LE COMMENTAIRE
   
     await Models.comment.destroy({where: { userId: userId }})
     .then( destroy => { commentValue = destroy})
