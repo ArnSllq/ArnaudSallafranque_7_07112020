@@ -2,25 +2,27 @@ if(!localStorage.getItem("token")) {
     window.location.href="/Frontend/login.html"
 }
 
-async function sendPost(e) {
+async function sendComment(e) {
     e.preventDefault()
     e.stopPropagation()
-    let description = document.getElementById('comment').value;
+    let comment = document.getElementById('comment').value;
     let userId = localStorage.getItem('userId');
+    const urlData = new URLSearchParams(window.location.search);
+    let postId = urlData.get('postId');
 
     try {
-        let postPost = await fetch("http://localhost:3000/api/post/", {
+        let postComment = await fetch("http://localhost:3000/api/comment/", {
             method: "POST",
-            headers: { 
+            headers: {
                 Authorization: "Bearer "+localStorage.getItem("token"),
                 Accept: "application/json",
                 "Content-Type": "application/json" 
             },
             body: JSON.stringify({
-                description, userId
+                comment, userId, postId
             })
         });
-        const body = await postPost.json();
+        const body = await postComment.json();
         if(body.message == "OK") {
             window.location.href="/Frontend/"
         }
@@ -29,5 +31,10 @@ async function sendPost(e) {
     }
 }
 
-let postSubmit = document.getElementById('addPostBtn')
-postSubmit.addEventListener('click', sendPost);
+let commentSubmit = document.getElementById('commentBtn')
+commentSubmit.addEventListener('click', sendComment);
+
+let formSubmit = document.getElementById('formComment')
+formSubmit.addEventListener('submit', sendComment);
+
+

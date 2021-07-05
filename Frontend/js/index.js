@@ -1,16 +1,7 @@
 if(!localStorage.getItem("token")) {
     window.location.href="/Frontend/login.html"
 }
-
 function newPost() {
-    let error = false;
-    if(!localStorage.getItem("token")) {
-        window.location.href="/Frontend/login.html"
-        error = true
-    }
-    if(error) {
-        return
-    }    
     window.location.href="/Frontend/addPost.html"
 };
 
@@ -42,6 +33,7 @@ async function fetchAllPosts() {
                 Accept: "application/json"
             }
         });
+        const count = await countAllComments(post.id);
         const userInfo = await userFetch.json();
         const postElement = document.createElement("article");
         postElement.innerHTML=/*html*/`
@@ -51,7 +43,7 @@ async function fetchAllPosts() {
                     <span>${new Date(post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>
                 </div>
                 <p>${post.description}</p>
-                <div>0</div>
+                <div>${count}</div>
             </a>
         `
         postContainer.appendChild(postElement);
@@ -59,3 +51,15 @@ async function fetchAllPosts() {
 }
 fetchAllPosts();
 
+async function countAllComments(postId) {
+    let getAllComments = await fetch("http://localhost:3000/api/comment/"+postId, {
+        method: "GET", 
+        headers: {
+            Authorization: "Bearer "+localStorage.getItem("token"),
+            Accept: "application/json"
+        }
+    })
+    const body = await getAllComments.json();
+
+    return body.comments.length
+}

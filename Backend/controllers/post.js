@@ -46,8 +46,8 @@ const Models = require('../models')
  */
 exports.createPost = async (req, res, next) => {
     const newPost = await Models.post.create({
-      description: req.body.comment,
-      userId: userId
+      description: req.body.description,
+      userId: req.body.userId
       })
     .then( post => {
         res.status(200).json({message : "OK", post})
