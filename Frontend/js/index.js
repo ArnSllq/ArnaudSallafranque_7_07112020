@@ -2,7 +2,6 @@ if(!localStorage.getItem("token")) {
     window.location.href="/Frontend/login.html"
 }
 
-
 function newPost() {
     let error = false;
     if(!localStorage.getItem("token")) {
@@ -46,7 +45,7 @@ async function fetchAllPosts() {
         const userInfo = await userFetch.json();
         const postElement = document.createElement("article");
         postElement.innerHTML=/*html*/`
-            <a href="/Frontend/post.html?id=${post.id}">
+            <a href="/Frontend/onepost.html?id=${post.id}">
                 <div>
                     <span>${userInfo.user.firstname + ' ' + userInfo.user.lastname}</span>
                     <span>${new Date(post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>

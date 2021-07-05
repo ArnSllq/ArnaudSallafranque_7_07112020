@@ -3,8 +3,10 @@ if(!localStorage.getItem("token")) {
 }
 
 async function fetchPost() { 
-
-    let getPost = await fetch("http://localhost:3000/api/post/1", {
+    const urlData = new URLSearchParams(window.location.search);
+    let postId = urlData.get('id');
+    console.log(postId);
+    let getPost = await fetch('http://localhost:3000/api/post/' +postId, {
         method: "GET",
         headers: {
             Authorization: "Bearer "+localStorage.getItem("token"),
