@@ -16,7 +16,7 @@ const Models = require('../models')
     Models.comment.findAll({
       //attributes: ['email', 'firstname'],
       where: { postId: req.params.postId },
-     // order: ['id', 'DESC']
+     order: [['id', 'ASC']]
     })
     .then(comments => {
       if(comments){

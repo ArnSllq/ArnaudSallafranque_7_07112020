@@ -32,32 +32,21 @@ exports.getOneUser = (req, res, next) => {
  * email, password, firstname, lastname
  */
  exports.signup = async (req, res, next) => {
-
+  let hashPwd
+  await bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+    hashPwd = hash
+  })
   const newUser = await Models.User.create(
     { firstname: req.body.firstname, 
       lastname: req.body.lastname, 
       email: req.body.email, 
-      password:req.body.password
+      password:hashPwd
     })
   .then( user => {
     res.status(200).json({message : "OK", user})
   })
   .catch(error => res.status(500).json({ error }));
-  
-
-    // utilisation de bcrypt pour hasher le mot de passe
-      //bcrypt.hash(req.body.password, 10)
-      //  .then(hash => {
-      //    const user = new User({
-      //      // utilisation de crypto-JS pour chiffrer les adresses mail
-      //      email: cryptoJS.AES.encrypt(req.body.email, key, {iv: iv}).toString(),
-      //      password: hash
-      //    });
-      //    user.save()
-      //      .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-      //      .catch(error => res.status(400).json({ error }));
-      //  })
-      //  .catch(error => res.status(500).json({ error }));
     };
 
 /**
@@ -69,45 +58,24 @@ exports.getOneUser = (req, res, next) => {
 
   await Models.User.findOne({
     //attributes: ['email', 'firstname'],
-    where: { email: req.body.email, password: req.body.password  }
+    where: { email: req.body.email }
   })
   .then(user => {
-    if(user){
-      res.status(200).json({
-        userId: user.id,
-        token: jwt.sign(
-          { userId: user.id },
-          'RANDOM_TOKEN_SECRET',
-          { expiresIn: '24h' }
-        )})
-    } else {
-      res.status(404).json({message: "Not Found"})
-    }
+    bcrypt.compare(req.body.password, user.password)
+    .then(valid => {
+      if(valid) {
+          res.status(200).json({
+            userId: user.id,
+            token: jwt.sign(
+              { userId: user.id },
+              'RANDOM_TOKEN_SECRET',
+              { expiresIn: '24h' }
+            )})
+      }
+    })
+    .catch(error => { console.log(error) })
   })
   .catch(error => res.status(500).json({ error }));
-  //   let encryptedEmail = cryptoJS.AES.encrypt(req.body.email, key, {iv: iv}).toString()
-  //   User.findOne({ email: encryptedEmail})
-  //     .then(user => {
-  //       if (!user) {
-  //         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-  //       }
-  //       bcrypt.compare(req.body.password, user.password)
-  //         .then(valid => {
-  //           if (!valid) {
-  //             return res.status(401).json({ error: 'Mot de passe incorrect !' });
-  //           }
-  //           res.status(200).json({
-  //             userId: user._id,
-  //             token: jwt.sign(
-  //               { userId: user._id },
-  //               'RANDOM_TOKEN_SECRET',
-  //               { expiresIn: '24h' }
-  //             )
-  //           });
-  //         })
-  //         .catch(error => res.status(500).json({ error }));
-  //     })
-  //     .catch(error => res.status(500).json({ error }));
  };
 
 /**

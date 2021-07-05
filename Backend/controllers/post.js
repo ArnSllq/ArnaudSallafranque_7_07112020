@@ -9,7 +9,7 @@ const Models = require('../models')
     Models.post.findAll({
       //attributes: ['email', 'firstname'],
     //   where: { id: req.params.id }, inutile car on veut tous les posts ?
-     // order: ['id', 'DESC']
+     order: [['id', 'ASC']]
     })
     .then(posts => {
       if(posts){
