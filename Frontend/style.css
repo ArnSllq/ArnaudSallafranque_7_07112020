@@ -1,47 +1,189 @@
 body {
-    margin-left: auto;
-    margin-right: auto;
+  margin: 0 auto;
+  font-family: "Dosis", Arial, sans-serif;
 }
 
 header {
-    height: 200px;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items:center;
-    align-content: center;
-    margin-left: auto;
-    margin-right: auto;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: lightgray;
 }
 
 header .groupo-logo {
-    height: 200px;
-    width: 200px;
+  object-fit: contain;
+  height: 100px;
+  width: 150px;
 }
 
 nav ul {
-    list-style: none;
-    text-align: right;
+  list-style: none;
+  text-align: right;
 }
 
 nav a {
-    text-decoration: none;
+  text-decoration: none;
+  color: black;
+}
+
+main {
+  margin-top: 20px;
+}
+
+#postBtn {
+  margin: 20px;
+  margin-top: 0px;
+  padding: 15px;
+  font-weight: 600;
+}
+
+#postsContainer {
+  /* margin-left: 20px; */
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#postsContainer a {
+  text-decoration: none;
+  color: black;
+}
+
+#postsContainer a div {
+  padding-left: 20px;
+}
+
+#postsContainer p {
+  font-weight: 600;
+  text-align: center;
+}
+
+#postContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#postContainer div span {
+  padding-left: 20px;
+  font-weight: 400;
+}
+
+#postContainer p {
+  font-weight: 600;
+  text-align: center;
+}
+
+.addComment {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#commentBtn {
+  padding: 10px 20px;
+}
+
+#commentsContainer article {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+#comment {
+  margin-top: 20px;
+}
+
+#commentBtn {
+  margin-top: 20px;
+}
+
+#profileContainer {
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+#profileContainer div {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#profileContainer article {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#profileContainer article #password {
+  height: 25px;
+  width: 80%;
+}
+
+#profileContainer input {
+  margin-bottom: 20px;
+}
+
+#modifyPwdBtn {
+  height: 40px;
+  width: 250px;
+  background-color: #00ae00;
+  border-style: none;
+  font-weight: 600;
+}
+
+#deleteAccount {
+  height: 40px;
+  width: 250px;
+  background-color: #b40000;
+  border-style: none;
+  color: white;
+  font-weight: 600;
+}
+
+article {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  width: 80%;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-color: #fd2d01;
 }
 
 form {
-    width: min-content;
-    background-color: #CECCCC;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 50px;
+  background-color: lightgray;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 40px;
 }
 form div {
-    width: auto;
-    margin-right: auto;
-    margin-left: auto;
+  width: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 .login-btn {
-    margin-top: 10px;
+  margin-top: 10px;
+}
+
+#post {
+  margin-top: 20px;
+}
+
+footer {
+  width: 100%;
+  background-color: lightgray;
+  height: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: black;
 }

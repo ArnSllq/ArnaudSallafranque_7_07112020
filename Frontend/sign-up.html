@@ -7,13 +7,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" >
         <link rel="stylesheet" href="style.css">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"> 
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="/Frontend/js/signup.js" defer></script>
     </head>
     <body>
         <header>
-            <img class="groupo-logo" src="source/icon-left-font.png" alt="logo Groupomania">
+            <img class="groupo-logo" src="source/icon-left-font-monochrome-black.png" alt="logo Groupomania">
             <nav>
                 <ul>
                     <li><a href="index.html">connexion</a></li>
@@ -28,16 +31,16 @@
                     <div><label for="lastname">Nom</label></div>
                     <div><input type="text" id="lastname" name="lastname" required></div>
                     <div><label for="email">Email</label></div>
-                    <div><input type="email" id="email" name="email" value="prenom.nom@groupomania.fr" required></div>
+                    <div><input type="email" id="email" name="email" placeholder="prenom.nom@groupomania.fr" required></div>
                     <div><label for="password">Mot de passe</label></div>
-                    <div><input type="text" id="password" name="password" required></div>
+                    <div><input type="password" id="password" name="password" required></div>
                     <div class="signup-btn"><input type="submit" id="signup-btn" value="S'inscrire"></div>
                 </form>
             </main>
-        <footer>
-
-
-        </footer>
+            <footer>
+                <p><a href="#">Mentions légales</a></p>
+                <p><a href="mailto:contact@groupomania.fr">Contactez-nous</a></p>
+            </footer>
     </body>
 
 </html>

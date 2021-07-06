@@ -18,12 +18,12 @@ async function fetchProfile() {
     const postElement = document.createElement("article");
     postElement.innerHTML=/*html*/`
         <div>
-            <span>${body.user.lastname}</span>
             <span>${body.user.firstname}</span>
-            <span>${body.user.email}</span>
+            <span>${body.user.lastname}</span></br>
+            <span><strong>${body.user.email}</strong></span>
         </div>
-        <label for="password"></label>
-        <input type="text" placeholder="Tapez votre nouveau mot de passe" id="password" name="password">
+        <label for="password">Modifier votre mot de passe :</label>
+        <input type="password" placeholder="Tapez votre nouveau mot de passe" id="password" name="password">
         <input type="submit" id="modifyPwdBtn" value="Modifier votre mot de passe">
         <input type="button" id="deleteAccount" value="Supprimer votre compte">
     `
@@ -58,8 +58,9 @@ async function modifyPassword() {
             })
         });
         const body = await putPassword.json();
-        if(body.message == "OK") {
+        if(body.message == "Ok") {
             window.location.href="/Frontend/"
+            alert("votre mot de passe a été modifié avec succès")
         }
     } catch(error) {
         throw new Error(error)
@@ -81,6 +82,7 @@ async function deleteAccount() {
         if(body.message == "OK") {
             localStorage.clear();
             window.location.href="/Frontend/"
+            alert('votre compte a bien été supprimé')
 
         }
     } catch(error) {
@@ -88,7 +90,7 @@ async function deleteAccount() {
     }
 }
 
-let logoutClick = getElementById("lougoutBtn");
+let logoutClick = document.getElementById("logoutBtn");
 logoutClick.addEventListener("click", logout)
 
 function logout() {

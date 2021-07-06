@@ -21,7 +21,7 @@ async function fetchAllPosts() {
     let postContainer = document.getElementById("postsContainer");
     if(body.posts.length == 0) {
         let emptyMessage = document.createElement("p");
-        emptyMessage.innerHTML="Oups, personne n'a fait de post, <a href=\"#\">souhaitez-vous faire un nouveau poste ?</a>"
+        emptyMessage.innerHTML="Oups, personne n'a fait de post, <a href=\"#\" onclick='newPost();'>souhaitez-vous en ajouter un ?</a>"
         postContainer.appendChild(emptyMessage) 
         return
     } 
@@ -43,7 +43,7 @@ async function fetchAllPosts() {
                     <span>${new Date(post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>
                 </div>
                 <p>${post.description}</p>
-                <div>${count}</div>
+                <div>${count} commentaires</div>
             </a>
         `
         postContainer.appendChild(postElement);

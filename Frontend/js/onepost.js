@@ -38,7 +38,7 @@ async function fetchPost() {
         </div>
         <p>${body.post.description}</p>
 
-        <div><input type="button" id="commentBtn" value="Ajouter un commentaire"></div>
+        <div class='addComment'><input type="button" id="commentBtn" value="Ajouter un commentaire"></div>
         <div id="commentsContainer"></div>
     `
     postContainer.appendChild(postElement);
@@ -61,7 +61,7 @@ async function fetchAllComments(postId) {
     let commentContainer = document.getElementById("commentsContainer");
     if(body2.comments.length == 0) {
         let emptyMessage = document.createElement("p");
-        emptyMessage.innerHTML="Oups, personne n'a fait de post, <a href=\"#\">souhaitez-vous faire un nouveau poste ?</a>"
+        emptyMessage.innerHTML="Oups, il n'y a pas encore de commentaires, <a href=\"#\">souhaitez-vous faire le premier ?</a>"
         commentContainer.appendChild(emptyMessage) 
         return
     }

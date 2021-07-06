@@ -8,12 +8,16 @@
         <link rel="stylesheet" href="style.css">
         <script src="/Frontend/js/addPost.js" defer></script>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"> 
+
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     </head>
     <body>
         <header>
-            <img class="groupo-logo" src="source/icon-left-font.png" alt="logo Groupomania">
+            <img class="groupo-logo" src="source/icon-left-font-monochrome-black.png" alt="logo Groupomania">
             <nav>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
@@ -26,13 +30,15 @@
                 <div id="newPostContainer">
                     <form>
                         <div><p>Vous pouvez ajouter un nouveau post sur cette page</p></div>
-                        <div><label for="comment">Votre post :</label></div>
-                        <div><input type="text" id="comment" name="comment" placeholder="C'est à vous" required></div>
+                        <div><label for="post" class="newPost">Votre post :</label></div>
+                        <textarea id="post" name="post" rows="4" cols="30" placeholder="C'est à vous"></textarea>
                         <div><input type="submit" id="addPostBtn" value="Poster"></div>
                     </form>
                 </div> 
             </main>
-        <footer>
-        </footer>
+            <footer>
+                <p><a href="#">Mentions légales</a></p>
+                <p><a href="mailto:contact@groupomania.fr">Contactez-nous</a></p>
+            </footer>
     </body>
 </html>

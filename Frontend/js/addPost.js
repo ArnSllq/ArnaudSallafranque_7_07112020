@@ -5,7 +5,7 @@ if(!localStorage.getItem("token")) {
 async function sendPost(e) {
     e.preventDefault()
     e.stopPropagation()
-    let description = document.getElementById('comment').value;
+    let description = document.getElementById('post').value;
     let userId = localStorage.getItem('userId');
 
     try {
