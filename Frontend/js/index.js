@@ -63,3 +63,11 @@ async function countAllComments(postId) {
 
     return body.comments.length
 }
+
+let logoutClick = document.getElementById("logoutBtn");
+logoutClick.addEventListener("click", logout)
+
+function logout() {
+    localStorage.clear();
+    window.location.href="/Frontend/"
+}

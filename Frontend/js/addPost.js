@@ -31,3 +31,11 @@ async function sendPost(e) {
 
 let postSubmit = document.getElementById('addPostBtn')
 postSubmit.addEventListener('click', sendPost);
+
+let logoutClick = document.getElementById("logoutBtn");
+logoutClick.addEventListener("click", logout)
+
+function logout() {
+    localStorage.clear();
+    window.location.href="/Frontend/"
+}

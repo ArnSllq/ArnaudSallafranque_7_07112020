@@ -91,3 +91,11 @@ function newComment() {
     let postId = urlData.get('id');
     window.location.href=`/Frontend/newcomment.html?postId=${postId}`
 };
+
+let logoutClick = document.getElementById("logoutBtn");
+logoutClick.addEventListener("click", logout)
+
+function logout() {
+    localStorage.clear();
+    window.location.href="/Frontend/"
+}
