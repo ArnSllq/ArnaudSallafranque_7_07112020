@@ -10,6 +10,8 @@ Vous pourrez ensuite créer votre base de données MySQL, avec le nom que vous i
 
 Les informations dans le fichier .env, à savoir le nom de base de données, le nom d'utilisateur et le mot de passe, devront être identique aux informations dans le fichier config.json du dossier config.
 
+Vous devrez ensuite créer votre base de données dans MySQL "create database nom_de_la_base_de_données;".
+
 Une fois ces étapes réalisées, vous pouvez ouvrir votre console et taper : npx seqelize db:migrate
 
 Vous devriez obtenir trois migrations, et voir dans votre base de données les tables "users", "comments", "posts" et enfin "sequelizemeta" qui est créées par l'ORM.
