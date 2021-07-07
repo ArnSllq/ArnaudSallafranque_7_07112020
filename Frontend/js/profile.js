@@ -81,7 +81,7 @@ async function deleteAccount() {
         const body = await deleteUser.json();
         if(body.message == "OK") {
             localStorage.clear();
-            window.location.href="/Frontend/"
+            window.location.href="/Frontend/login.html"
             alert('votre compte a bien été supprimé')
 
         }

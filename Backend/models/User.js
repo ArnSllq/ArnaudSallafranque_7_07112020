@@ -25,8 +25,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       unique: 'email'
     },
-    password: DataTypes.STRING
-  }, {
+    password: DataTypes.STRING,
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      default: false
+    },
+  },
+   {
     sequelize,
     modelName: 'User',
   });

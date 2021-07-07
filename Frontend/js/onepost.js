@@ -37,13 +37,17 @@ async function fetchPost() {
             <span>${new Date(body.post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>
         </div>
         <p>${body.post.description}</p>
-
+        ${localStorage.getItem("isAdmin")=="true" || localStorage.getItem("userId") == body.post.userId ? '<div class="deletePost"><input type="button" id="deleteBtn" value="Supprimer le post"></div>' : ""}
         <div class='addComment'><input type="button" id="commentBtn" value="Ajouter un commentaire"></div>
         <div id="commentsContainer"></div>
     `
     postContainer.appendChild(postElement);
     let addComment = document.getElementById('commentBtn');
     addComment.addEventListener('click', newComment);  
+    if(localStorage.getItem("isAdmin")=="true" || localStorage.getItem("userId") == body.post.userId) { 
+        let deleteBtn = document.getElementById('deleteBtn');
+        deleteBtn.addEventListener('click', deletePost);
+    }
 
     fetchAllComments(postId);
 }
@@ -81,8 +85,14 @@ async function fetchAllComments(postId) {
                 <span>${new Date(comment.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>
             </div>
             <p>${comment.comment}</p>
+            ${localStorage.getItem("isAdmin")=="true" || localStorage.getItem("userId") == comment.userId ? '<div class="deleteComment"><input type="button" id="deleteCmtBtn'+comment.id+'" value="Supprimer le commentaire"></div>' : ""}
         `
         commentContainer.appendChild(commentElement);
+
+        if(localStorage.getItem("isAdmin") =="true" || localStorage.getItem("userId") == comment.userId) {
+            let deleteCmtBtn = document.getElementById("deleteCmtBtn"+comment.id);
+            deleteCmtBtn.addEventListener('click', function() {deleteComment(comment.id)});
+        }
     })
 }
 
@@ -98,4 +108,36 @@ logoutClick.addEventListener("click", logout)
 function logout() {
     localStorage.clear();
     window.location.href="/Frontend/"
+}
+
+async function deletePost() {
+    const urlData = new URLSearchParams(window.location.search);
+    let postId = urlData.get('id');
+    const postDelete = await fetch('http://localhost:3000/api/post/'+postId, { 
+        method: "DELETE",
+        headers: {
+            Authorization: "Bearer "+localStorage.getItem("token"),
+            Accept: "application/json",
+        },
+    })
+    const body = await postDelete.json();
+    if(body.message == "OK") {
+        window.location.href="/Frontend/"
+        alert('post supprimé')
+    }
+}
+
+async function deleteComment(commentId) {
+    const commentDelete = await fetch('http://localhost:3000/api/comment/'+commentId, { 
+        method: "DELETE",
+        headers: {
+            Authorization: "Bearer "+localStorage.getItem("token"),
+            Accept: "application/json",
+        },
+            })
+    const body = await commentDelete.json();
+    if(body.message == "OK") {
+        window.location.reload();
+        alert('commentaire supprimé')
+    }
 }

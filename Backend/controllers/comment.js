@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Models = require('../models')
+const jwt = require('jsonwebtoken')
 
 /**
  * GET : Count le nombre de commentaire d'un post
@@ -54,3 +55,16 @@ const Models = require('../models')
  * DELETE : Supprimer un commentaire sur un post
  * commentID, token
  */
+
+exports.deleteComment = async (req, res, next) => {
+  const token = req.headers.authorization
+  const decodedToken = jwt.decode(token.split(" ")[1])
+  const userId = decodedToken.userId
+  const isAdmin = decodedToken.isAdmin
+  const comment =  await Models.comment.findOne({where: {id: req.params.id}});
+  if(!isAdmin && userId != comment.userId) {return res.status(401).json({message: "Vérifiez que vous avez les droits suffisants pour supprimer ce commentaire"}) }
+
+  await Models.comment.destroy({where: { id: req.params.id }})
+  .then( destroy => {res.status(200).json({ message: "OK"}) })
+  .catch(error => res.status(500).json({ error }));
+}

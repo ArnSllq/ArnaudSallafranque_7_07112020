@@ -41,7 +41,8 @@ exports.getOneUser = (req, res, next) => {
     { firstname: req.body.firstname, 
       lastname: req.body.lastname, 
       email: req.body.email, 
-      password:hashPwd
+      password:hashPwd,
+      isAdmin: false
     })
   .then( user => {
     res.status(200).json({message : "OK", user})
@@ -66,8 +67,9 @@ exports.getOneUser = (req, res, next) => {
       if(valid) {
           res.status(200).json({
             userId: user.id,
+            isAdmin: user.isAdmin,
             token: jwt.sign(
-              { userId: user.id },
+              { userId: user.id, isAdmin: user.isAdmin },
               'RANDOM_TOKEN_SECRET',
               { expiresIn: '24h' }
             )})
@@ -84,11 +86,16 @@ exports.getOneUser = (req, res, next) => {
  * email, token, password
  */
 
- exports.modifyPassword = (req, res, next) => {
+ exports.modifyPassword = async (req, res, next) => {
    const token = req.headers.authorization
    const decodedToken = jwt.decode(token.split(" ")[1])
    const userId = decodedToken.userId
-   const newPassword = req.body.password
+   let hashNewPwd
+   await bcrypt.hash(req.body.password, 10)
+     .then(hash => {
+     hashNewPwd = hash
+   })
+   const newPassword = hashNewPwd
    if(newPassword && newPassword != null){
     Models.User.update({ password: newPassword}, { where: { id: userId}})
     .then( () => { res.status(200).json({message:'Ok'})})
@@ -117,11 +124,18 @@ exports.getOneUser = (req, res, next) => {
   .then( destroy => { commentValue = destroy})
   .catch(error => res.status(500).json({ error }));
 
+  // SUPPRIMER TOUS LES COMMENTAIRES DU POST
+  let postsToDelete = await Models.post.findAll({ where: { userId: userId} })
+  for(const post of postsToDelete) {
+    await Models.comment.destroy({ where: { postId: post.id}})
+    await Models.post.destroy({ where: { id: post.id }})
+  }
+
   // SUPPRIMER TOUS LES POSTS
 
-  await Models.post.destroy({where: { userId: userId }})
-  .then( destroy => { postValue = destroy})
-  .catch(error => res.status(500).json({ error }));
+  // await Models.post.destroy({where: { userId: userId }})
+  // .then( destroy => { postValue = destroy})
+  // .catch(error => res.status(500).json({ error }));
 
   // SUPPRIMER L'UTILISATEUR
 
@@ -131,7 +145,7 @@ exports.getOneUser = (req, res, next) => {
 
   // END
 
-  res.json({message : "OK", 
+  res.status(200).json({message : "OK", 
     accountDelete : accountValue, 
     commentsDelete : commentValue, 
     postsDelete : postValue})

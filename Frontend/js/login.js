@@ -35,6 +35,7 @@ async function login(e) {
         if(body.token) {
             localStorage.setItem("token", body.token)
             localStorage.setItem("userId", body.userId)
+            localStorage.setItem("isAdmin", body.isAdmin)
             window.location.href="/Frontend/"
         }
     } catch(error) {

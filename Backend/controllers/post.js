@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Models = require('../models')
+const jwt = require('jsonwebtoken')
 
 /**
  * GET : Afficher tous les posts
@@ -82,17 +83,19 @@ exports.createPost = async (req, res, next) => {
     const token = req.headers.authorization
     const decodedToken = jwt.decode(token.split(" ")[1])
     const userId = decodedToken.userId
+    const isAdmin = decodedToken.isAdmin
     let commentValue, postValue
+    const post = await Models.post.findOne({where: {id: req.params.id}});
+    if(!isAdmin && userId != post.userId) {return res.status(401).json({message: "Vérifiez que vous avez les droits suffisants pour supprimer ce post"})}
   
-    // SUPPRIMER LE COMMENTAIRE
-  
-    await Models.comment.destroy({where: { userId: userId }})
+    // SUPPRIMER LES COMMENTAIRES
+    await Models.comment.destroy({where: { postId: req.params.id }})
     .then( destroy => { commentValue = destroy})
     .catch(error => res.status(500).json({ error }));
   
-    // SUPPRIMER TOUS LES POSTS
+    // SUPPRIMER LE POST
   
-    await Models.post.destroy({where: { userId: userId }})
+    await Models.post.destroy({where: { id: req.params.id }})
     .then( destroy => { postValue = destroy})
     .catch(error => res.status(500).json({ error }));
 
