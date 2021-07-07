@@ -36,6 +36,7 @@ async function fetchPost() {
             <span>${userInfo.user.firstname + ' ' + userInfo.user.lastname}</span>
             <span>${new Date(body.post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>
         </div>
+        ${body.post.imageURL?'<img src="'+body.post.imageURL+'" alt="post-image">':''}
         <p>${body.post.description}</p>
         ${localStorage.getItem("isAdmin")=="true" || localStorage.getItem("userId") == body.post.userId ? '<div class="deletePost"><input type="button" id="deleteBtn" value="Supprimer le post"></div>' : ""}
         <div class='addComment'><input type="button" id="commentBtn" value="Ajouter un commentaire"></div>

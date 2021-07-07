@@ -42,6 +42,7 @@ async function fetchAllPosts() {
                     <span>${userInfo.user.firstname + ' ' + userInfo.user.lastname}</span>
                     <span>${new Date(post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</span>
                 </div>
+                ${post.imageURL?'<img src="'+post.imageURL+'" alt="post-image">':''}
                 <p>${post.description}</p>
                 <div>${count} commentaires</div>
             </a>

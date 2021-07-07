@@ -26,10 +26,12 @@
         </header>
             <main>
                 <div id="newPostContainer">
-                    <form>
+                    <form enctype="multipart/form-data">
                         <div><p>Vous pouvez ajouter un nouveau post sur cette page</p></div>
                         <div><label for="post" class="newPost">Votre post :</label></div>
                         <textarea id="post" name="post" rows="4" cols="30" placeholder="C'est à vous"></textarea>
+                        <div><label for="image">Insérer votre image ici</label></div>
+                        <input type="file" name="image" id="image" accept="image/png, image/jpeg">
                         <div><input type="submit" id="addPostBtn" value="Poster"></div>
                     </form>
                 </div> 

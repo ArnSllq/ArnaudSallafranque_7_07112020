@@ -13,6 +13,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+
+      imageURL: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,

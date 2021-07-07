@@ -3,25 +3,42 @@ if(!localStorage.getItem("token")) {
 }
 
 async function sendPost(e) {
-    e.preventDefault()
-    e.stopPropagation()
-    let description = document.getElementById('post').value;
-    let userId = localStorage.getItem('userId');
-
     try {
+        e.preventDefault()
+        e.stopPropagation()
+        let description = document.getElementById('post').value;
+        let userId = localStorage.getItem('userId');
+        let image = document.getElementById('image').files[0];
+        let headers = {
+            Authorization: "Bearer "+localStorage.getItem("token"),
+            Accept: "application/json"
+        };
+        let body = null;
+        if(image) {
+            const formData = new FormData();
+            formData.append("image", image);
+            formData.append("post", JSON.stringify({
+                description: description,
+                userId: userId,
+            }))
+            body=formData;
+        } else {
+            headers["Content-Type"]="application/json"
+            body = JSON.stringify({
+                description: description,
+                userId: userId,
+            });
+        }
+        console.log(image);
+
+
         let postPost = await fetch("http://localhost:3000/api/post/", {
             method: "POST",
-            headers: { 
-                Authorization: "Bearer "+localStorage.getItem("token"),
-                Accept: "application/json",
-                "Content-Type": "application/json" 
-            },
-            body: JSON.stringify({
-                description, userId
-            })
+            headers: headers,
+            body: body
         });
-        const body = await postPost.json();
-        if(body.message == "OK") {
+        const bodyPost = await postPost.json();
+        if(bodyPost.message == "OK") {
             window.location.href="/Frontend/"
         }
     } catch(error) {

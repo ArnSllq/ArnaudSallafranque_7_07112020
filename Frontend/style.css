@@ -187,3 +187,10 @@ footer a {
   text-decoration: none;
   color: black;
 }
+
+img {
+  display: block;
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+}

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Models = require('../models')
 const jwt = require('jsonwebtoken')
+const fs = require('fs');
 
 /**
  * GET : Afficher tous les posts
@@ -46,14 +47,23 @@ const jwt = require('jsonwebtoken')
  * email, description, date
  */
 exports.createPost = async (req, res, next) => {
-    const newPost = await Models.post.create({
-      description: req.body.description,
-      userId: req.body.userId
-      })
-    .then( post => {
-        res.status(200).json({message : "OK", post})
+  let postData = {};
+  if(req.file) { 
+    postData = { 
+      ...JSON.parse(req.body.post),
+      imageURL: req.protocol+"://"+req.get("host")+"/images/"+req.file.filename
+    }
+  } else {
+    postData= {...req.body}
+  }
+
+  const newPost = await Models.post.create({
+    ...postData
     })
-    .catch(error => res.status(500).json({ error }))
+  .then( post => {
+      res.status(200).json({message : "OK", post})
+  })
+  .catch(error => res.status(500).json({ error }))
 };
 
 /**
